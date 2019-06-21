@@ -7,10 +7,18 @@
     padding: 0px 30% 0px 30%;
 }
 
-#btn{
-    width: 150px;
+#btn-log{
+    width: 200px;
 }
 
+
+#btn-reg{
+    width: 200px;
+}
 input{
     text-align: center;
+}
+
+#passwordConfirm{
+    color: red;
 }
