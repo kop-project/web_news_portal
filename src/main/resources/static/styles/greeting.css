@@ -1,0 +1,117 @@
+html {
+    min-height: 100%
+}
+body {
+    min-height: 100%;
+    background: #fff;
+    font: 14px/125% Tahoma;
+}
+p {
+    margin: 1em 0;
+    text-align: center
+}
+.popup__overlay {
+    display: none;
+    position: fixed;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0,0,0,.7);
+    text-align: center
+}
+.popup__overlay:after {
+    display: inline-block;
+    *display: inline;
+    *zoom: 1;
+    height: 100%;
+    width: 0;
+    vertical-align: middle;
+    content: ''
+}
+/* Added for IE<9 compatibility */
+.popup__overlay_ie {
+    background: #000;
+    opacity: .7;
+    filter: alpha(opacity=70)
+}
+.popup {
+    display: inline-block;
+    *display: inline;
+    *zoom: 1;
+    position: relative;
+    max-width: 80%;
+    padding: 20px;
+    border: 5px solid #fff;
+    border-radius: 15px;
+    box-shadow: inset 0 2px 2px 2px rgba(0,0,0,.4);
+    background: #fff;
+    vertical-align: middle
+}
+/* Added instead of :after pseudoelement */
+.popup__valignfix {
+    display: inline-block;
+    *display: inline;
+    *zoom: 1;
+    width: 0;
+    height: 100%;
+    vertical-align: middle
+}
+.popup-form__row {
+    margin: 1em 0
+}
+label {
+    display: inline-block;
+    *display: inline;
+    *zoom: 1;
+    width: 120px;
+    text-align: left
+}
+input[type="text"], input[type="password"] {
+    margin: 0;
+    padding: 2px;
+    border: 1px solid;
+    border-color: #999 #ccc #ccc;
+    border-radius: 2px
+}
+input[type="button"] {
+    padding: 6px 16px;
+    border: 0;
+    border-radius: 2px;
+    -webkit-box-shadow: inset 0 1px 1px rgba(255,255,255,.3);
+    box-shadow:         inset 0 1px 1px rgba(255,255,255,.3);
+    cursor: pointer;
+    background: #444;
+    background: -webkit-linear-gradient(90deg, #515151, #333 48%, #333 52%, #515151 100%);
+    background:    -moz-linear-gradient(90deg, #515151, #333 48%, #333 52%, #515151 100%);
+    background:     -ms-linear-gradient(90deg, #515151, #333 48%, #333 52%, #515151 100%);
+    background:      -o-linear-gradient(90deg, #515151, #333 48%, #333 52%, #515151 100%);
+    background:         linear-gradient(90deg, #515151, #333 48%, #333 52%, #515151 100%);
+    color: #fff
+}
+.popup__close {
+    display: block;
+    position: absolute;
+    top: -20px;
+    right: 10px;
+    width: 12px;
+    height: 12px;
+    padding: 8px;
+    border: 5px solid #fff;
+    border-radius: 50%;
+    -webkit-box-shadow: inset 0 2px 2px 2px rgba(0,0,0,.4),
+    0 3px 3px     rgba(0,0,0,.4);
+    box-shadow:         inset 0 2px 2px 2px rgba(0,0,0,.4),
+    0 3px 3px     rgba(0,0,0,.4);
+    cursor: pointer;
+    background: #fff;
+    text-align: center;
+    font-size: 12px;
+    line-height: 12px;
+    color: #444;
+    text-decoration: none;
+    font-weight: bold
+}
+.popup__close:hover {
+    background: #ddd
+}

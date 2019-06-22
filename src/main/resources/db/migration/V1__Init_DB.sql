@@ -8,9 +8,27 @@ create table if not exists user_role (
 create table if not exists users (
     id int8 not null,
     login varchar(255) not null,
-    username varchar(255) not null,
-    surname varchar(255) not null,
+    username varchar(255),
+    surname varchar(255),
     password varchar(255) not null,
+    primary key (id)
+);
+
+
+create table if not exists topics (
+    id int8 not null,
+    displayname varchar(255) not null,
+    description varchar(255),
+    author varchar(255) not null,
+    primary key (id)
+);
+
+
+create table if not exists messages (
+    id int8 not null,
+    topics_id varchar(255) not null,
+    sender varchar(255),
+    timestamp bigint not null ,
     primary key (id)
 );
 

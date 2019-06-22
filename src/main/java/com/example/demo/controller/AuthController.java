@@ -28,13 +28,15 @@ public class AuthController {
     @PostMapping("/registration")
     public String registrationInPortal(@Valid User user, Model model){
 
-      /*  if(userRepo.findByLogin(user.getLogin()) != null){
+        if(userRepo.findByLogin(user.getLogin()) != null){
             return "registration";
         }
-*/
+
         if (!authService.isValidPassword(user.getPassword(), user.getPassword2())) {
             return "registration";
         }
+
+        authService.saveUser(user);
 
         return "redirect:/login";
     }

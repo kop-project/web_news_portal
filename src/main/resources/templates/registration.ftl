@@ -9,7 +9,7 @@
 
 <body>
 
-<!--<p align="center"><img  src="/static/images/InTech-Logo-6-01.png" alt="logo"></p>-->
+<p align="center"><img  src="/static/images/InTech-Logo-6-01.png" alt="logo"></p>
 <h1 id="logo">Добро пожаловать на новостной портал #InTechNews</h1>
 
 <div id="page">
