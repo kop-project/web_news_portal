@@ -6,11 +6,13 @@
 
 <body>
 <p align="center"><img  src="/static/images/InTech-Logo-6-01.png" alt="logo"></p>
-<p align="center">Привет!</p>
-
+<#if user.getUsername()?has_content && user.getSurname()?has_content>
+    <p align="center">Добро пожаловать, ${user.getUsername()} ${user.getSurname()}</p>
+<#else >
+    <p align="center">Добро пожаловать, ${user.getLogin()}</p>
+</#if>
 <form action="/topic/create" method="post" enctype="multipart/form-data">
     <div id="page">
-        <input type="hidden" name="_csrf" value="${_csrf.token}">
 
         <div class="input-group">
             <input type="text" name="displayname" class="form-control">
@@ -21,7 +23,7 @@
 
         <br>
 
-        <input class="form-control" type="text" placeholder="Автор" name="author" readonly>
+        <input class="form-control" type="text" placeholder="${user.getLogin()}" value="${user.getLogin()}" name="author" readonly>
 
         <br>
 

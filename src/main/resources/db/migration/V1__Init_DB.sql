@@ -16,19 +16,20 @@ create table if not exists users (
 
 
 create table if not exists topics (
-    id int8 not null,
+    id varchar(255) not null,
     displayname varchar(255) not null,
-    description varchar(255),
+    description varchar(512) not null ,
     author varchar(255) not null,
+    logo varchar(255) not null,
     primary key (id)
 );
 
 
 create table if not exists messages (
-    id int8 not null,
+    id varchar(255) not null,
     topics_id varchar(255) not null,
-    sender varchar(255),
-    timestamp bigint not null ,
+    sender varchar(255) not null,
+    timestamp bigint not null,
     primary key (id)
 );
 

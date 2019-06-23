@@ -7,8 +7,7 @@ import javax.persistence.*;
 public class Message {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    private Long id;
+    private String id;
 
     @Column(name = "topics_id")
     private String topicsId;
@@ -17,11 +16,20 @@ public class Message {
 
     private Long timestamp;
 
-    public Long getId() {
+    public Message(){}
+
+    public Message(String id, String topicsId, String sender, Long timestamp) {
+        this.id = id;
+        this.topicsId = topicsId;
+        this.sender = sender;
+        this.timestamp = timestamp;
+    }
+
+    public String getId() {
         return id;
     }
 
-    public void setId(Long id) {
+    public void setId(String id) {
         this.id = id;
     }
 
