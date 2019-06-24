@@ -41,7 +41,10 @@ public class TopicController {
     CommonService commonService;
 
     @RequestMapping(method = RequestMethod.POST,value = "/create")
-    public String createTopic(Topic topic, @RequestParam("file") MultipartFile multipartFile,  RedirectAttributes redirectAttributes ) throws IOException {
+    public String createTopic(Topic topic,
+                              @RequestParam("file") MultipartFile multipartFile,
+                              RedirectAttributes redirectAttributes
+    ) throws IOException {
         if (multipartFile != null && !multipartFile.getOriginalFilename().isEmpty()) {
             File uploadDir = new File(uploadPath);
 

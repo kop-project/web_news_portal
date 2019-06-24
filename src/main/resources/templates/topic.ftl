@@ -14,13 +14,9 @@
     <input type="hidden" id="topicId" value="${topic.getId()}">
     <input type="hidden" id="sender" value="${user.getLogin()}">
 
-    <div id="messages">
-        <div class="container">
-            <p>Hello. How are you today?</p>
-            <span class="time-right">11:00</span>
-        </div>
-    </div>
+    <div id="content">
 
+    </div>
     <!--<div class="input-group">
         <div class="custom-file">
             <input type="text" class="custom-file-input" id="inputGroupFile04" value="asd">
@@ -39,14 +35,6 @@
 </div>
 
 <script>
-
-
-    var templateClone = document.getElementById('messages').cloneNode(true);
-    console.log(templateClone);
-
-//    var templateClone = document.getElementById('messages').cloneNode(true);
-  //  console.log(templateClone.childNodes[1].childNodes);
-
     document.getElementById('btn-reg').onclick = function (ev) {
         var topicId = document.getElementById('topicId').value;
         var sender = document.getElementById('sender').value;
@@ -60,11 +48,37 @@
 
 
         xhr.onreadystatechange = function (ev1) {
-                console.log(xhr.responseText);
+            var json = JSON.parse(xhr.responseText);
 
-            var templateClone = document.getElementById('messages').cloneNode(true);
 
-            document.getElementById('messages').nextSibling.appendChild(templateClone);
+            console.log();
+
+            if(document.getElementById('content').childElementCount === 0){
+             document.getElementById('content').innerHTML = " <div id=\"messages\">\n" +
+                 "            <div class=\"container\">\n" +
+                 "                <p></p>\n" +
+                 "                <span class=\"time-right\"></span>\n" +
+                 "                <span class=\"time-left\"></span>\n" +
+                 "            </div>\n" +
+                 "        </div>";
+            } else {
+
+                var templateClone = document.getElementById('messages').cloneNode(true);
+
+            }
+             var container = templateClone.firstElementChild.children;
+            container[0].innerHTML = json.content;
+
+            var time = json.timestamp;
+
+
+                container[1].innerHTML = new Date(time * 1e3).toISOString().slice(-13, -5);
+
+            container[2].innerHTML = json.sender;
+
+
+            console.log(container);
+            document.getElementById('content').appendChild(templateClone);
 
             xhr.onreadystatechange = null;
         }
