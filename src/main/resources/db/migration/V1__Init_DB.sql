@@ -34,7 +34,8 @@ create table if not exists topics (
 
 create table if not exists messages (
     id varchar(255) not null,
-    topics_id varchar(255) not null,
+    topic_id varchar(255) not null,
+    content varchar(255) not null,
     sender varchar(255) not null,
     timestamp bigint not null,
     primary key (id)

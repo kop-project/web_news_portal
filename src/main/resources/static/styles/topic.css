@@ -60,3 +60,16 @@
 .txt {
     width: 500px;
 }
+#messages{
+    height: 75px;
+}
+
+#escape{
+    font-size: 21px;
+    float: right;
+    text-decoration: none;
+}
+i{
+    z-index: 999;
+    font-size: 15px;
+}

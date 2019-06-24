@@ -3,7 +3,11 @@ package com.example.demo.service;
 import org.springframework.stereotype.Service;
 
 import java.sql.Timestamp;
+import java.time.Instant;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.Random;
+import java.util.TimeZone;
 
 @Service
 public class CommonService {
@@ -19,5 +23,15 @@ public class CommonService {
         }
         sb.append(":intech" + "." + type);
         return sb.toString();
+    }
+
+    public String getTime(Long timestamp) {
+
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("HH:mm");
+        LocalDateTime triggerTime =
+                LocalDateTime.ofInstant(Instant.ofEpochMilli(timestamp),
+                        TimeZone.getDefault().toZoneId());
+        String formatDateTime =  triggerTime.format(formatter);
+        return  formatDateTime;
     }
 }

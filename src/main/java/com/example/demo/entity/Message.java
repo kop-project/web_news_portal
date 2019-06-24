@@ -9,24 +9,34 @@ public class Message {
     @Id
     private String id;
 
-    @Column(name = "topics_id")
+    @Column(name = "topic_id")
     private String topicsId;
 
     private String sender;
 
+    private String content;
+
     private Long timestamp;
 
+    public String getContent() {
+        return content;
+    }
+
+    public void setContent(String content) {
+        this.content = content;
+    }
 
     @ManyToOne
-    @JoinColumn(name = "topics_id", referencedColumnName = "id", insertable = false, updatable = false)
+    @JoinColumn(name = "topic_id", referencedColumnName = "id", insertable = false, updatable = false)
     private Topic topic;
 
     public Message(){}
 
-    public Message(String id, String topicsId, String sender, Long timestamp) {
+    public Message(String id, String topicsId, String sender, String content, Long timestamp) {
         this.id = id;
         this.topicsId = topicsId;
         this.sender = sender;
+        this.content = content;
         this.timestamp = timestamp;
     }
 

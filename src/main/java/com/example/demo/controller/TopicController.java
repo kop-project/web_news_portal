@@ -4,19 +4,20 @@ import com.example.demo.entity.Message;
 import com.example.demo.entity.Topic;
 import com.example.demo.entity.User;
 import com.example.demo.model.MessageResponse;
-import com.example.demo.model.TopicModel;
 import com.example.demo.repo.MessageRepo;
 import com.example.demo.repo.TopicRepo;
 import com.example.demo.service.CommonService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.web.PageableDefault;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
-import org.springframework.web.servlet.mvc.support.RedirectAttributesModelMap;
 
 import java.io.File;
 import java.io.IOException;
@@ -57,8 +58,6 @@ public class TopicController {
             multipartFile.transferTo(new File(uploadPath + "/" + resultFilename));
             topic.setLogo(resultFilename);
         }
-
-
         topic.setId(commonService.generateId("topic"));
         topicRepo.save(topic);
 
@@ -67,16 +66,16 @@ public class TopicController {
     }
 
     @RequestMapping(method = RequestMethod.GET, value = "/{topicId}")
-    public String renderTopicPage(@PathVariable String topicId, Model model) {
+    public String renderTopicPage(@PathVariable String topicId, Model model,  @PageableDefault(size = 4) Pageable pageable) {
 
         Topic topic = topicRepo.findById(topicId);
         User user = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
 
         model.addAttribute("user", user);
         model.addAttribute("topic", topic);
-        List<Message> messages = topic.getMessages();
-        model.addAttribute("messages", topic.getMessages());
-
+        Page<Message> messages = messageRepo.getMessages(topicId, pageable);
+        model.addAttribute("messages", messages);
+        model.addAttribute("upload", uploadPath);
         return "topic";
     }
 
@@ -89,12 +88,21 @@ public class TopicController {
     ) {
         String messageId = commonService.generateId("topic");
         Long timestamp = new Timestamp(System.currentTimeMillis()).getTime();
-        Message message = new Message(messageId, topicId, sender, timestamp);
+        Message message = new Message(messageId, topicId, sender, content,timestamp);
 
         messageRepo.save(message);
         MessageResponse messageResponse = new MessageResponse(content, sender, timestamp);
         return messageResponse;
     }
+
+    @RequestMapping(method = RequestMethod.GET, value = "/delete/{topicId}")
+    public String deleteTopic(@PathVariable String topicId){
+
+       Topic topic = topicRepo.findById(topicId);
+       topicRepo.delete(topic);
+       return "redirect:/";
+    }
+
 
 
 }
