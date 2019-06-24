@@ -16,6 +16,11 @@ public class Message {
 
     private Long timestamp;
 
+
+    @ManyToOne
+    @JoinColumn(name = "topics_id", referencedColumnName = "id", insertable = false, updatable = false)
+    private Topic topic;
+
     public Message(){}
 
     public Message(String id, String topicsId, String sender, Long timestamp) {
@@ -23,6 +28,14 @@ public class Message {
         this.topicsId = topicsId;
         this.sender = sender;
         this.timestamp = timestamp;
+    }
+
+    public Topic getTopic() {
+        return topic;
+    }
+
+    public void setTopic(Topic topic) {
+        this.topic = topic;
     }
 
     public String getId() {

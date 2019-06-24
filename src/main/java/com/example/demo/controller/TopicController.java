@@ -21,6 +21,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributesModelMap;
 import java.io.File;
 import java.io.IOException;
 import java.sql.Timestamp;
+import java.util.List;
 import java.util.UUID;
 
 @Controller
@@ -40,14 +41,13 @@ public class TopicController {
     @Autowired
     CommonService commonService;
 
-    @RequestMapping(method = RequestMethod.POST,value = "/create")
+    @RequestMapping(method = RequestMethod.POST, value = "/create")
     public String createTopic(Topic topic,
                               @RequestParam("file") MultipartFile multipartFile,
                               RedirectAttributes redirectAttributes
     ) throws IOException {
         if (multipartFile != null && !multipartFile.getOriginalFilename().isEmpty()) {
             File uploadDir = new File(uploadPath);
-
             if (!uploadDir.exists()) {
                 uploadDir.mkdir();
             }
@@ -67,13 +67,15 @@ public class TopicController {
     }
 
     @RequestMapping(method = RequestMethod.GET, value = "/{topicId}")
-    public String renderTopicPage(@PathVariable String topicId, Model model){
+    public String renderTopicPage(@PathVariable String topicId, Model model) {
 
         Topic topic = topicRepo.findById(topicId);
         User user = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
 
         model.addAttribute("user", user);
         model.addAttribute("topic", topic);
+        List<Message> messages = topic.getMessages();
+        model.addAttribute("messages", topic.getMessages());
 
         return "topic";
     }

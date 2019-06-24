@@ -1,5 +1,12 @@
 create sequence hibernate_sequence start 2 increment 1;
 
+--CREATE DATABASE intech;
+
+--create user intech_user with password 'intech_user';
+
+--grant ALL on DATABASE intech to intech_user;
+
+
 create table if not exists user_role (
     user_id int8 not null,
     roles varchar(255)

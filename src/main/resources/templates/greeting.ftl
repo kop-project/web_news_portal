@@ -13,7 +13,7 @@
     }
 </style>
 <body>
-<p align="center" id="logo-img"><img  src="/static/images/InTech-Logo-6-01.png" width="575px" alt="logo"></p>
+<!--<p align="center" id="logo-img"><img  src="/static/images/InTech-Logo-6-01.png" width="575px" alt="logo"></p>-->
 <#if user.getUsername()?has_content && user.getSurname()?has_content>
     <p align="center">Добро пожаловать, ${user.getUsername()} ${user.getSurname()}</p>
 <#else >
@@ -67,28 +67,25 @@
 
 <div class="row">
 
-
-        <#list topics.content as topic>
-            <div class="col-md-3">
-                <div class="card mx-auto mb-3" style="max-width: 270px;">
-                    <!-- Изображение -->
-                    <img class="card-img-top" src="/examples/images/examples/img-1.jpg" alt="...">
-                    <!-- Текстовый контент -->
-                    <div class="card-body">
-                        <h4 class="card-title">${topic.getAuthor()}</h4>
-                        <p class="card-text">${topic.getDescription()}</p>
-                        <a href="/topic/${topic.getId()}" class="btn btn-primary">Перейти</a>
-                    </div>
-                </div><!-- Конец карточки -->
-            </div>
-        </#list>
-    <@p.pager "/" topics/>
-    </@p.pager "/" topics/>
-
-
+    <#list topics.content as topic>
+        <div class="col-md-3">
+            <div class="card mx-auto mb-3" style="max-width: 270px;">
+                <!-- Изображение -->
+                <img class="card-img-top" src="/examples/images/examples/img-1.jpg" alt="...">
+                <!-- Текстовый контент -->
+                <div class="card-body">
+                    <h4 class="card-title">${topic.getAuthor()}</h4>
+                    <p class="card-text">${topic.getDescription()}</p>
+                    <a href="/topic/${topic.getId()}" class="btn btn-primary">Перейти</a>
+                </div>
+            </div><!-- Конец карточки -->
+        </div>
+    </#list>
+    <#if topics.content?has_content>
+        <@p.pager "/" topics>
+        </@p.pager>
+    </#if>
 </div>
-
-
 
 </body>
 </html>
