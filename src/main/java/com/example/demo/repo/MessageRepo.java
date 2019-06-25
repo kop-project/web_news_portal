@@ -18,4 +18,11 @@ public interface MessageRepo extends JpaRepository<Message, Long> {
 
     @Query(value = SQL_GET_MESSAGES, nativeQuery = true)
     Page<Message> getMessages(@Param("topics_id") String topics_id, Pageable pageable);
+
+    Message findById(String id);
+
+    void deleteById(String id);
 }
+
+
+

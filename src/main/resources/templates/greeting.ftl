@@ -5,7 +5,6 @@
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
     <link rel="stylesheet" type="text/css" href="/static/styles/auth.css">
     <link rel="stylesheet" type="text/css" href="/static/styles/greetingPosts.css">
-    <link rel="stylesheet" type="text/css" href="/static/styles/font-awesome.css/home/pavel/Загрузки/fontawesome-free-5.9.0-web/css/fontawesome.min.css.css">
 </head>
 
 <style>
@@ -69,17 +68,17 @@
 <div class="row">
 
     <#list topics.content as topic>
-        <div class="col-md-3">
+        <div class="col-md-3 topic">
             <div class="card mx-auto mb-3" style="max-width: 270px;">
                 <!-- Изображение -->
-                <img class="card-img-top" src="/img/${topic.getLogo()}" alt="...">
+                <img class="card-img-top" src="/img/${topic.getLogo()}" alt="..." width="200px" height="200px">
                 <!-- Текстовый контент -->
-                <div class="card-body">
+                <div class="card-body theme">
                     <h4 class="card-title">${topic.getAuthor()}</h4>
-                    <p class="card-text">${topic.getDescription()}</p>
+                    <p  class="card-text">${topic.getDescription()}</p>
                     <a href="/topic/${topic.getId()}" class="btn btn-primary">Перейти</a>
                     <#if user.isAdmin()==true>
-                        <a href="/topic/delete/${topic.getId()}" class="btn btn-danger">Удалить</a>
+                        <a href="/topic/deleteTopic/${topic.getId()}" class="btn btn-danger">Удалить</a>
                     </#if>
                 </div>
             </div><!-- Конец карточки -->

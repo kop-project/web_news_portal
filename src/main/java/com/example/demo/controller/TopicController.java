@@ -66,7 +66,7 @@ public class TopicController {
     }
 
     @RequestMapping(method = RequestMethod.GET, value = "/{topicId}")
-    public String renderTopicPage(@PathVariable String topicId, Model model,  @PageableDefault(size = 4) Pageable pageable) {
+    public String renderTopicPage(@PathVariable String topicId, Model model,  @PageableDefault(size = 3) Pageable pageable) {
 
         Topic topic = topicRepo.findById(topicId);
         User user = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
@@ -95,12 +95,22 @@ public class TopicController {
         return messageResponse;
     }
 
-    @RequestMapping(method = RequestMethod.GET, value = "/delete/{topicId}")
+    @RequestMapping(method = RequestMethod.GET, value = "/deleteTopic/{topicId}")
     public String deleteTopic(@PathVariable String topicId){
 
        Topic topic = topicRepo.findById(topicId);
        topicRepo.delete(topic);
        return "redirect:/";
+    }
+
+    @RequestMapping(method = RequestMethod.GET, value = "/deleteMessage/{messageId}")
+    public String deleteMessage(@PathVariable String messageId, RedirectAttributes redirectAttributes){
+
+        Message message = messageRepo.findById(messageId);
+        messageRepo.delete(message);
+        redirectAttributes.addAttribute("topicId", message.getTopicsId());
+
+        return "redirect:/topic/{topicId}";
     }
 
 

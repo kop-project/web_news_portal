@@ -18,17 +18,6 @@ public class Topic {
 
     private String logo;
 
-    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER, mappedBy = "topic")
-    private List<Message> messages;
-
-    public List<Message> getMessages() {
-        return messages;
-    }
-
-    public void setMessages(List<Message> messages) {
-        this.messages = messages;
-    }
-
     public String getLogo() {
         return logo;
     }

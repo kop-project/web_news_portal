@@ -1,3 +1,13 @@
+.topic {
+	height: 400px;
+}
+.theme {
+	height: 200px;
+}
+
+.card-text{
+	height: 70px;
+}
 p{
 	font-size: 20px;
 }

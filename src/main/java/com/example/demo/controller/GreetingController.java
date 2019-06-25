@@ -26,11 +26,11 @@ public class GreetingController {
 
     @GetMapping("/")
     public String greeting (Model model,
-                           @PageableDefault(size = 4) Pageable pageable) {
+                           @PageableDefault(size = 3) Pageable pageable) {
 
         User user = (User)SecurityContextHolder.getContext().getAuthentication().getPrincipal();
 
-        Page<Topic> topics = topicRepo.findAll(pageable);
+        Page<Topic> topics = topicRepo.getSortTopic(pageable);
         model.addAttribute("user", user);
         model.addAttribute("topics", topics);
         return "greeting";

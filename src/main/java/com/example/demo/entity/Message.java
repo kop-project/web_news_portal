@@ -26,9 +26,6 @@ public class Message {
         this.content = content;
     }
 
-    @ManyToOne
-    @JoinColumn(name = "topic_id", referencedColumnName = "id", insertable = false, updatable = false)
-    private Topic topic;
 
     public Message(){}
 
@@ -38,14 +35,6 @@ public class Message {
         this.sender = sender;
         this.content = content;
         this.timestamp = timestamp;
-    }
-
-    public Topic getTopic() {
-        return topic;
-    }
-
-    public void setTopic(Topic topic) {
-        this.topic = topic;
     }
 
     public String getId() {

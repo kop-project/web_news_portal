@@ -13,6 +13,7 @@ document.getElementById('reg').onclick = function (ev) {
         var json = JSON.parse(xhr.responseText);
         if (document.getElementById('content').childElementCount === 0) {
             document.getElementById('content').innerHTML = " <div id=\"messages\">\n" +
+                "<i class=\"fas fa-arrow-alt-circle-right\"></i>\n" +
                 "            <div class=\"container\">\n" +
                 "                <p></p>\n" +
                 "                <span class=\"time-right\"></span>\n" +
@@ -38,9 +39,9 @@ document.getElementById('reg').onclick = function (ev) {
         container[2].innerHTML = json.sender;
 
 
-        console.log(container);
         document.getElementById('content').appendChild(templateClone);
-
+        document.getElementById('textMessage').innerText = '';
+        window.location.reload();
         xhr.onreadystatechange = null;
     }
 }

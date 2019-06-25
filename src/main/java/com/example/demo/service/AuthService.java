@@ -31,15 +31,10 @@ public class AuthService implements UserDetailsService {
             Pattern upCaseReg = Pattern.compile(("[A-Z]"));
             Pattern numReg = Pattern.compile(("[0-9]"));
 
-            Matcher specSymMatch = specSymReg.matcher(password);
-            Matcher lowCaseMatch = lowCaseReg.matcher(password);
-            Matcher upCaseMatch = upCaseReg.matcher(password);
-            Matcher numMatch = numReg.matcher(password);
-
-            boolean hasSpec = specSymMatch.find();
-            boolean hasLowSym = lowCaseMatch.find();
-            boolean hasUpSym = upCaseMatch.find();
-            boolean hasNum = numMatch.find();
+            boolean hasSpec = specSymReg.matcher(password).find();
+            boolean hasLowSym = lowCaseReg.matcher(password).find();
+            boolean hasUpSym  = upCaseReg.matcher(password).find();
+            boolean hasNum = numReg.matcher(password).find();
 
             if(hasSpec && hasLowSym && hasUpSym && hasNum){
                return true;
