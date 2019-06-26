@@ -14,37 +14,40 @@
 
 <div id="page">
     <form action="/registration" method="post">
-        <input type="hidden" name="_csrf" value="${_csrf.token}">
         <div class="form-group">
             <label for="exampleInputEmail1">Логин</label>
-            <input type="text" name="login" class="form-control" id="exampleInputEmail1" placeholder="Введите логин">
-            <small id="emailHelp" class="form-text text-muted">Логин должен быть от 4 до 16 символов</small>
+            <input id="text" name="login" class="form-control"  placeholder="Введите логин">
+            <small id="loginError" class="form-text text-muted"><#if loginError?has_content>${loginError}</#if></small>
         </div>
 
         <div class="form-group">
             <label for="exampleInputEmail1">Имя</label>
-            <input type="text" name="username" class="form-control" id="exampleInputEmail1" placeholder="Введите имя">
+            <input id="username" name="username" class="form-control"  placeholder="Введите имя">
+            <small id="nameError" class="form-text text-muted"></small>
+
         </div>
 
         <div class="form-group">
             <label for="exampleInputEmail1">Фамилия</label>
-            <input type="text" name="surname" class="form-control" id="exampleInputEmail1" placeholder="Введите фамилию">
+            <input id="surname" name="surname" class="form-control" placeholder="Введите фамилию">
+            <small id="surnameError" class="form-text text-muted"></small>
+
         </div>
 
         <div class="form-group">
             <label for="exampleInputPassword1">Пароль</label>
             <input type="password" name="password" class="form-control" id="password" placeholder="Введите пароль">
-            <small id="password" class="form-text text-muted"></small>
+            <small id="passwordError" class="form-text text-muted"></small>
         </div>
 
         <div class="form-group">
             <label for="exampleInputPassword1">Повторение пароля</label>
-            <input type="password" name="password2" class="form-control" id="password2"
+            <input type="password2" name="password2" class="form-control" id="password2"
                    placeholder="Подтвердите пароль">
             <small id="passwordConfirm" class="form-text text-muted"></small>
         </div>
 
-        <button type="submit" class="btn btn-primary" id="btn-log">Зарегистрироваться</button>
+        <button type="submit" class="btn btn-primary" id="btn">Зарегистрироваться</button>
     </form>
 </div>
 
@@ -55,14 +58,48 @@
 
 </script>
 <script>
-    document.getElementById('btn-log').onclick = function () {
-        var pswd = document.getElementById('password');
-        var pswdConfirm = document.getElementById('password2');
+    document.getElementById('password').onclick = function () {
+        alert('Пароль должен быть больше 7 символов и включать хотя бы 1 цифру, букву строчную и заглавную, а так же спец.символ !@#$%');
+    };
 
-        if (pswd.value !== pswdConfirm.value) {
-            document.getElementById('passwordConfirm').innerText = 'Пароли не совпадают';
+
+    document.getElementById('btn').onsubmit = function (event) {
+
+    var login = document.getElementById('login');
+    var name1 = document.getElementById('username');
+    var surname = document.getElementById('surname');
+    var password = document.getElementById('password');
+    var password2 = document.getElementById('password2');
+
+    event.preventDefault();
+
+        if (login.value.length <= 0) {
+            document.getElementById('loginError').innerText = 'Ошибка. Логин больше 0';
             event.preventDefault();
+        } else {
+            document.getElementById('loginError').innerText = '';
         }
+
+        if (name1.value.length <= 0) {
+            document.getElementById('nameError').innerText = 'Ошибка. Имя больше 0';
+            event.preventDefault();
+        } else {
+            document.getElementById('nameError').innerText = '';
+        }
+
+        if (surname.value.length <= 0) {
+            document.getElementById('surnameError').innerText = 'Ошибка. Фамилия больше 0';
+            event.preventDefault();
+        } else {
+            document.getElementById('surnameError').innerText = '';
+        }
+
+        if(password.value.length < 8 && password2.value.length < 8) {
+            event.preventDefault();
+            document.getElementById('passwordError').innerText = 'Пароль не дожен быть пустой';
+            document.getElementById('passwordConfirmError').innerText = 'Пароль не дожен быть пустой';
+        }
+
     }
 </script>
 </html>

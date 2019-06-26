@@ -1,7 +1,8 @@
 package com.example.demo.entity;
 
-import javax.persistence.*;
-import java.util.List;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.Table;
 
 @Entity
 @Table(name = "topics")
@@ -17,6 +18,7 @@ public class Topic {
     private String author;
 
     private String logo;
+
 
     public String getLogo() {
         return logo;

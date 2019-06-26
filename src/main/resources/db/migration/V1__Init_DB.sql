@@ -25,9 +25,9 @@ create table if not exists users (
 create table if not exists topics (
     id varchar(255) not null,
     displayname varchar(255) not null,
-    description varchar(512) not null ,
+    description varchar(512)  ,
     author varchar(255) not null,
-    logo varchar(255) not null,
+    logo varchar(255) ,
     primary key (id)
 );
 
@@ -38,6 +38,7 @@ create table if not exists messages (
     content varchar(255) not null,
     sender varchar(255) not null,
     timestamp bigint not null,
+    type varchar(255) not null,
     primary key (id)
 );
 

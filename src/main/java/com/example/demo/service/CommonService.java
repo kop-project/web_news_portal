@@ -25,13 +25,4 @@ public class CommonService {
         return sb.toString();
     }
 
-    public String getTime(Long timestamp) {
-
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("HH:mm");
-        LocalDateTime triggerTime =
-                LocalDateTime.ofInstant(Instant.ofEpochMilli(timestamp),
-                        TimeZone.getDefault().toZoneId());
-        String formatDateTime =  triggerTime.format(formatter);
-        return  formatDateTime;
-    }
 }

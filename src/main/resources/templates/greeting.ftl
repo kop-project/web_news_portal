@@ -11,8 +11,18 @@
     body {
         max-width: 98%;
     }
+    #pagination{
+        position: absolute;
+        top: 85%;
+        left: 40%;
+    }
+    #escape{
+        float: right;
+    }
 </style>
 <body>
+<a id="escape" href="/logout" class="">Выйти</a>
+
 <p align="center" id="logo-img"><img  src="/static/images/InTech-Logo-6-01.png" width="575px" alt="logo"></p>
 <#if user.getUsername()?has_content && user.getSurname()?has_content>
     <p align="center">Добро пожаловать, ${user.getUsername()} ${user.getSurname()}</p>
@@ -77,17 +87,19 @@
                     <h4 class="card-title">${topic.getAuthor()}</h4>
                     <p  class="card-text">${topic.getDescription()}</p>
                     <a href="/topic/${topic.getId()}" class="btn btn-primary">Перейти</a>
-                    <#if user.isAdmin()==true>
+                    <#if user.isAdmin()==true || user.getLogin() == topic.getAuthor()>
                         <a href="/topic/deleteTopic/${topic.getId()}" class="btn btn-danger">Удалить</a>
                     </#if>
                 </div>
             </div><!-- Конец карточки -->
         </div>
     </#list>
+    <div id="pagination">
     <#if topics.content?has_content>
         <@p.pager "/" topics>
         </@p.pager>
     </#if>
+    </div>
 </div>
 
 </body>

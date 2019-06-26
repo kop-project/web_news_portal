@@ -16,7 +16,7 @@
         <div class="form-group">
             <label for="exampleInputEmail1">Логин</label>
             <input type="text" name="username" class="form-control" id="exampleInputEmail1"  placeholder="Введите логин">
-            <small id="emailHelp" class="form-text text-muted">Логин должен быть от 4 до 16 символов</small>
+            <small id="emailHelp" class="form-text text-muted"></small>
         </div>
         <div class="form-group">
             <label for="exampleInputPassword1">Пароль</label>

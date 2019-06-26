@@ -8,7 +8,6 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
-import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class AuthService implements UserDetailsService {
@@ -25,7 +24,7 @@ public class AuthService implements UserDetailsService {
     }
 
     public boolean isValidPassword(String password, String passwordConfirm){
-        if(password.equals(passwordConfirm)) {
+        if(password.equals(passwordConfirm) && password.length() >= 8) {
             Pattern specSymReg = Pattern.compile(("[!@#$%]"));
             Pattern lowCaseReg = Pattern.compile(("[a-z]"));
             Pattern upCaseReg = Pattern.compile(("[A-Z]"));

@@ -1,6 +1,6 @@
 <#import "pager.ftl" as p>
 
-<html>
+<html xmlns="http://www.w3.org/1999/html">
 <head>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
           integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
@@ -37,11 +37,11 @@
     }
 </style>
 <body>
-<a id="escape" href="/">Назад</a>
+<a id="escape" href="/" >Назад</a>
     <!-- Topic -->
     <div id="info">
         <div>
-            <a align="center" id="logo-img"><img  src="/img/${topic.getLogo()}" width="775px" height="300px" alt="logo"></a>
+            <a align="center" id="logo-img"><img  src="/img/${topic.getLogo()}" width="700px" height="300px" alt="logo"></a>
         </div>
         <div class="inform">
             <div class="input-group">
@@ -68,23 +68,29 @@
 
         <#if messages?has_content>
         <#list messages.content as message>
+            <#if message.getType() != "m.room.create">
             <div id="messages">
                 <div class="container">
                     <p>${message.getContent()}</p>
 
-                    <span class="time-right">11:00</span>
+                    <span class="time-right" id="${message.getTimestamp()}" >
+
+                    </span>
+
+
                     <span class="time-left">${message.getSender()}</span>
                     <br/>
-                    <#if user.isAdmin() == true >
+                    <#if user.isAdmin() == true || message.getSender() == user.getLogin()>
                         <p><a href="/topic/deleteMessage/${message.getId()}" id="deleteMessage">Удалить</a></p>
                     </#if>
                 </div>
             </div>
+            </#if>
         </#list>
-            <br>
 
             <@p.pager "/topic/${topic.getId()}" messages>
             </@p.pager>
+            <#else>
         </#if>
     </div>
 
@@ -94,7 +100,9 @@
         <textarea class="form-control txt" id="message" rows="3"  placeholder="Введите текст сообщения"></textarea>
         <button type="submit" class="btn btn-primary" id="reg">Отправить сообщение</button>
     </div>
-
+<script>
+</script>
 <script src="/static/scripts/sendMessage.js"></script>
+<script src="/static/scripts/getTime.js"></script>
 </body>
 </html>

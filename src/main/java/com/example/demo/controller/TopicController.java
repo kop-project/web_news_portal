@@ -22,7 +22,6 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import java.io.File;
 import java.io.IOException;
 import java.sql.Timestamp;
-import java.util.List;
 import java.util.UUID;
 
 @Controller
@@ -59,8 +58,11 @@ public class TopicController {
             topic.setLogo(resultFilename);
         }
         topic.setId(commonService.generateId("topic"));
-        topicRepo.save(topic);
 
+        Long timestamp = new Timestamp(System.currentTimeMillis()).getTime();
+        Message message = new Message(commonService.generateId("topic"), topic.getId(), topic.getAuthor(), "system", timestamp, "m.room.create");
+        topicRepo.save(topic);
+        messageRepo.save(message);
         redirectAttributes.addAttribute("topicId", topic.getId());
         return "redirect:/topic/{topicId}";
     }
@@ -88,7 +90,7 @@ public class TopicController {
     ) {
         String messageId = commonService.generateId("topic");
         Long timestamp = new Timestamp(System.currentTimeMillis()).getTime();
-        Message message = new Message(messageId, topicId, sender, content,timestamp);
+        Message message = new Message(messageId, topicId, sender, content,timestamp, "m.room.message");
 
         messageRepo.save(message);
         MessageResponse messageResponse = new MessageResponse(content, sender, timestamp);

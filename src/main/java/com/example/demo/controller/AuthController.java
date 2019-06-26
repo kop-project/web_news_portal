@@ -29,10 +29,12 @@ public class AuthController {
     public String registrationInPortal(@Valid User user, Model model){
 
         if(userRepo.findByLogin(user.getLogin()) != null){
+            model.addAttribute("loginError", "Данный пользователь уже зарегистрирован");
             return "registration";
         }
 
         if (!authService.isValidPassword(user.getPassword(), user.getPassword2())) {
+            model.addAttribute("passwordError", "Пароль не валидный");
             return "registration";
         }
 

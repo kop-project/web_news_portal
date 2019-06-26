@@ -26,15 +26,25 @@ public class Message {
         this.content = content;
     }
 
+    private String type;
+
+    public String getType() {
+        return type;
+    }
+
+    public void setType(String type) {
+        this.type = type;
+    }
 
     public Message(){}
 
-    public Message(String id, String topicsId, String sender, String content, Long timestamp) {
+    public Message(String id, String topicsId, String sender, String content, Long timestamp, String type) {
         this.id = id;
         this.topicsId = topicsId;
         this.sender = sender;
         this.content = content;
         this.timestamp = timestamp;
+        this.type = type;
     }
 
     public String getId() {

@@ -26,7 +26,7 @@ public class GreetingController {
 
     @GetMapping("/")
     public String greeting (Model model,
-                           @PageableDefault(size = 3) Pageable pageable) {
+                           @PageableDefault(size = 4) Pageable pageable) {
 
         User user = (User)SecurityContextHolder.getContext().getAuthentication().getPrincipal();
 
