@@ -42,7 +42,7 @@
 
         <div class="form-group">
             <label for="exampleInputPassword1">Повторение пароля</label>
-            <input type="password2" name="password2" class="form-control" id="password2"
+            <input type="password" name="password2" class="form-control" id="password2"
                    placeholder="Подтвердите пароль">
             <small id="passwordConfirm" class="form-text text-muted"></small>
         </div>
